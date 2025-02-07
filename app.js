@@ -28,15 +28,16 @@ function islogged(req,res,next){
       // putting the details of user in the params so that i can access it at required page to show the particular details
       next();
   } catch (err) {
-      return res.status(401).send("Invalid token"); // Handle invalid token error
+      return res.send("Invalid token",err); // Handle invalid token error
   }
 
 }
 
-app.get('/profile',islogged, (req, res) => {
-    
+app.get('/profile',islogged, async(req, res) => {
+    let user=await usermodel.findOne({email:req.user.email});
 
-    res.send(req.user)
+
+    res.render("profile",{user});
 
 })
 
@@ -47,23 +48,26 @@ app.get('/', (req, res) => {
 })
 
 app.post("/create",async(req,res)=>{
-    let {user_name,email,password,age}=req.body;
+    let {username,email,password,age}=req.body;
     let checkuser= await usermodel.findOne({email})
    
     if(checkuser) res.send("user already exits ")
     
     bcrypt.genSalt(10,(err,salt)=>{
         bcrypt.hash(password,salt,async(err,hash)=>{
+
             let newuser=await usermodel.create({
-                user_name,
+                username,
                 email,
                 password:hash,
                 age
             })
-            let token=jwt.sign({email},"screte");
+            console.log(newuser.username);
+            
+            let token=jwt.sign({email:req.body.email},"secrete");
             res.cookie("token",token);
             
-            res.send(newuser);
+            res.redirect("profile");
         })
     })
 })

@@ -8,8 +8,34 @@
 
 </head>
 <body>
-    <div class="bg-zinc-800 h-screen flex flex-col items-center justify-center">
-        <h1 class="text-4xl font-bold text-yellow-400 mb-6">Profile Page</h1>
+    <div class="bg-zinc-800 h-screen flex flex-col p-10">
+        <h1 class="text-4xl font-bold text-yellow-400 mb-6"> hey , <%= user.username %> ✌️</h1>
+        <p>what to create new post ?</p>
+        <form action="/post" method="post">
+            <textarea name="content" id="" ></textarea>
+            <input type="submit" value="post" >
+        </form>
+
+        <div >
+            <h1>your posts</h1>
+            <div>
+                <a href="#">@user_01</a>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate reiciendis id iste totam modi laudantium odio. Dolorem ratione</p>
+
+                <div>
+                    <a href="#">like</a>
+                    <a href="#">edit</a>
+                </div>
+                
+            </div>
+        </div>
+        <a href="/logout" class="fixed top-4 right-4 bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Logout
+        </a>
+
+
+
+
         
     </div>
     
