@@ -68,6 +68,8 @@ app.post("/create",async(req,res)=>{
             res.cookie("token",token);
             
             res.redirect("profile");
+
+            
         })
     })
 })
