@@ -25,6 +25,7 @@ function islogged(req,res,next){
   
   try {
       req.user = jwt.verify(token, "secrete"); // Verify the token
+      console.log(req.user);
       // putting the details of user in the params so that i can access it at required page to show the particular details
       next();
   } catch (err) {
@@ -94,7 +95,7 @@ app.post("/login",async(req,res)=>{
         if(result===true){
             let token=jwt.sign({email},"secrete");
             res.cookie("token",token);
-            res.send(" you can login !!");
+            res.redirect("profile");
         }
         else {
             res.send(" password is wrong ");
@@ -106,7 +107,7 @@ app.post("/login",async(req,res)=>{
 
 
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5001
 
 app.listen(port, () => {
   console.log(`listening on port `,port)
