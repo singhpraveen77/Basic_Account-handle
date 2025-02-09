@@ -42,6 +42,26 @@ app.get('/profile',islogged, async(req, res) => {
 
 })
 
+//posts route
+app.post('/posts',islogged, async(req, res) => {
+    let user=await usermodel.findOne({email:req.user.email});
+
+    let {content}=req.body;
+    console.log(content);
+
+    let post=await postmodel.create({
+        user:user._id,
+        content
+    })
+
+    user.posts.push(post._id);
+    await user.save();
+
+
+    res.redirect("profile");
+
+})
+
 app.get('/', (req, res) => {
   
   res.render('index')

@@ -9,7 +9,7 @@ let postSchema=new mongoose.Schema({
         ref:'user'
     },
     
-    data:{
+    date:{
         type:Date,
         default:Date.now
     },
