@@ -6,7 +6,7 @@ const mongoose=require("mongoose")
 let postSchema=new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'User'
     },
     
     date:{
@@ -16,11 +16,11 @@ let postSchema=new mongoose.Schema({
     content:String,
     likes:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'User'
     }]
 })
        
 // Compile model from schema
-let posts = mongoose.model('posts', postSchema );
+let posts = mongoose.model('Post', postSchema );
 
 module.exports=posts;

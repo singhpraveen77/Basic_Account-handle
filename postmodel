@@ -1,0 +1,21 @@
+const mongoose = require("mongoose");
+
+let postSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',  // Reference the 'User' model here
+    required: true
+  },
+  content: {
+    type: String,
+    required: true
+  },
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'  // This references users who liked the post
+  }]
+}, { timestamps: true });
+
+let Post = mongoose.model('Post', postSchema);
+
+module.exports = Post;

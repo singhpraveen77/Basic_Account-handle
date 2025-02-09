@@ -25,7 +25,7 @@ function islogged(req,res,next){
   
   try {
       req.user = jwt.verify(token, "secrete"); // Verify the token
-      console.log(req.user);
+    //   console.log(req.user);
       // putting the details of user in the params so that i can access it at required page to show the particular details
       next();
   } catch (err) {
@@ -35,7 +35,7 @@ function islogged(req,res,next){
 }
 
 app.get('/profile',islogged, async(req, res) => {
-    let user=await usermodel.findOne({email:req.user.email});
+    let user=await usermodel.findOne({email:req.user.email}).populate("posts");
 
 
     res.render("profile",{user});
@@ -47,7 +47,7 @@ app.post('/posts',islogged, async(req, res) => {
     let user=await usermodel.findOne({email:req.user.email});
 
     let {content}=req.body;
-    console.log(content);
+    // console.log(content);
 
     let post=await postmodel.create({
         user:user._id,
