@@ -20,11 +20,12 @@ let userSchema=new mongoose.Schema({
     age:Number,
     posts:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Post'
+        ref:'post'// THE NAME OF THIS SHOULD BE SAME AS COLLECTION OF THIS REFERRING TO IN MODEL ("")
     }]
 },{timestamps:true})
        
 // Compile model from schema
-let User = mongoose.model('User', userSchema );
+let User = mongoose.model('user', userSchema );
 
 module.exports=User;
+//
