@@ -26,7 +26,8 @@
                             <div class="mt-2 flex items-center ">
                                 <a href="/like/<%= ele._id %>" class="text-blue-400 h-5 hover:text-blue-700 flex items-center justify-start">
                                     <span class="mr-2 w-16 text-center"><%= (ele.likes.indexOf(user._id)===-1) ? "like  ":"unlike" %></span>
-                                    <a href="#" class="text-green-400 hover:text-green-600 w-full sm:w-auto mt-2 sm:mt-0">Edit</a>
+
+                                    <a href="/edit/<%= ele._id %>" class="text-green-400 hover:text-green-600 w-full sm:w-auto mt-2 sm:mt-0">Edit</a>
                                 </a>
                             </div>
                             <span class="bg-gray-800 text-white w-10 ml-1 h-8 flex items-center justify-center rounded-full"><%= ele.likes.length %></span>

@@ -60,6 +60,20 @@ app.get('/like/:id',islogged, async(req, res) => {
 
 })
 
+app.get('/edit/:id',islogged, async(req, res) => {
+    let post=await postmodel.findOne({_id:req.params.id});
+
+    
+
+    res.render("edit",{post});
+
+})
+
+app.post("/update/:id",async(req,res)=>{
+    let post=await postmodel.findOneAndUpdate({_id:req.params.id},{content:req.body.content});
+    res.redirect("/profile");
+})
+
 //posts route
 app.post('/posts',islogged, async(req, res) => {
     let user=await usermodel.findOne({email:req.user.email});
