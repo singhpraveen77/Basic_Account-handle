@@ -42,6 +42,24 @@ app.get('/profile',islogged, async(req, res) => {
 
 })
 
+app.get('/like/:id',islogged, async(req, res) => {
+    let post=await postmodel.findOne({_id:req.params.id}).populate("user");
+
+    // console.log(req.user);
+    let real_user=await usermodel.findOne({email:req.user.email});
+    console.log(real_user);
+    if(post.likes.indexOf(real_user._id)===-1)
+        post.likes.push(real_user._id);
+    
+    else 
+        post.likes.splice(post.likes.indexOf(real_user._id),1);
+    
+    await post.save();
+
+    res.redirect("/profile");
+
+})
+
 //posts route
 app.post('/posts',islogged, async(req, res) => {
     let user=await usermodel.findOne({email:req.user.email});
